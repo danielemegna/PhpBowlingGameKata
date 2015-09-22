@@ -37,8 +37,8 @@ class FrameTest extends PHPUnit_Framework_TestCase {
     $this->frame->setSecondShot(4);
 
     $nextFrame = new Frame(5);
-    $this->frame->setNextFrame($nextFrame);
     $nextFrame->setSecondShot(2);
+    $this->frame->setNextFrame($nextFrame);
 
     $this->assertEquals(6 + 4 + 5, $this->frame->getScore());
   }
