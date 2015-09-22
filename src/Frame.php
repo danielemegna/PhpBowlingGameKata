@@ -13,11 +13,10 @@ class Frame {
   }
 
   function getScore() {
-    $score = 0;
-    $score += $this->spareAdditionalScore();
-    $score += $this->strikeAdditionalScore();
-    $score += $this->shotsSum();
-    return $score;
+    return
+      $this->shotsSum() +
+      $this->spareAdditionalScore() +
+      $this->strikeAdditionalScore();
   }
 
   private function spareAdditionalScore() {
