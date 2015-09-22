@@ -8,7 +8,7 @@ class Game {
     $this->firstFrame = null;
   }
 
-  function getScore() {
+  function score() {
     $score = 0;
     $currentFrame = $this->firstFrame;
 
@@ -20,7 +20,7 @@ class Game {
     return $score;
   }
 
-  function shot($knockedDownPins) {
+  function roll($knockedDownPins) {
     $lastFrame = $this->getLastFrame();
 
     if($lastFrame == null) {

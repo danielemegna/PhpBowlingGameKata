@@ -10,60 +10,59 @@ class GameTest extends PHPUnit_Framework_TestCase {
     $this->game = new Game();
   }
  
-  function testWithoutShots_ScoreIsZero() {
-    $this->assertTrue(is_int($this->game->getScore()));
+  function testWithoutRoll_ScoreIsZero() {
     $this->assertGameScore(0);
   }
 
-  function testSingleShot() {
-    $this->game->shot(2);
+  function testSingleRoll() {
+    $this->game->roll(2);
     $this->assertGameScore(2);
   }
 
-  function testTwoShot() {
-    $this->game->shot(3);
-    $this->game->shot(1);
+  function testDoubleRoll() {
+    $this->game->roll(3);
+    $this->game->roll(1);
 
     $this->assertGameScore(4);
   }
 
-  function testWithSpareShot_NextShotIsCountedTwice() {
-    $this->game->shot(6);
-    $this->game->shot(4);
+  function testWithASpare_NextRollIsCountedTwice() {
+    $this->game->roll(6);
+    $this->game->roll(4);
 
-    $this->game->shot(3);
-    $this->game->shot(4);
+    $this->game->roll(3);
+    $this->game->roll(4);
 
     $this->assertGameScore(10 + (3) + 7);
   }
 
-  function testSpareShotInTheMiddleOfGame() {
-    $this->game->shot(1);
-    $this->game->shot(3);
+  function testSpareInTheMiddleOfGameTestCase() {
+    $this->game->roll(1);
+    $this->game->roll(3);
 
-    $this->game->shot(6);
-    $this->game->shot(4);
+    $this->game->roll(6);
+    $this->game->roll(4);
 
-    $this->game->shot(2);
-    $this->game->shot(3);
+    $this->game->roll(2);
+    $this->game->roll(3);
 
     $this->assertGameScore(4 + 10 + (2) + 5);
   }
 
-  function testWithStrikeShot_NextTwoShotsAreCountedTwice() {
-    $this->game->shot(10);
+  function testWithAStrike_NextTwoRollsAreCountedTwice() {
+    $this->game->roll(10);
 
-    $this->game->shot(3);
-    $this->game->shot(5);
+    $this->game->roll(3);
+    $this->game->roll(5);
 
-    $this->game->shot(5);
-    $this->game->shot(4);
+    $this->game->roll(5);
+    $this->game->roll(4);
 
     $this->assertGameScore(10 + 8 + (8) + 9);
   }
 
   private function assertGameScore($expected) {
-    $this->assertEquals($expected, $this->game->getScore());
+    $this->assertEquals($expected, $this->game->score());
   }
 
 }
