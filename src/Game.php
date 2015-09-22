@@ -12,9 +12,11 @@ class Game {
     $score = 0;
     $currentFrame = $this->firstFrame;
 
-    while($currentFrame != null) {
+    $count = 1;
+    while($currentFrame != null && $count <= 10) {
       $score += $currentFrame->getScore();
       $currentFrame = $currentFrame->getNextFrame();
+      $count++;
     }
 
     return $score;

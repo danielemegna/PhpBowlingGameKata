@@ -72,6 +72,13 @@ class GameTest extends PHPUnit_Framework_TestCase {
     $this->assertGameScore(10 + (10 + 4) + 10 + (4 + 2) + 6);
   }
 
+  function testPerfectGame() {
+    for($i = 0; $i < 12; $i++)
+      $this->game->roll(10);
+
+    $this->assertGameScore(300);
+  }
+
   private function assertGameScore($expected) {
     $this->assertEquals($expected, $this->game->score());
   }
