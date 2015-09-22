@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../src/Game.php';
+include_once __DIR__ . '/../src/Game.php';
 
 class GameTest extends PHPUnit_Framework_TestCase {
 

@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../src/Frame.php';
+include_once __DIR__ . '/../src/Frame.php';
 
 class FrameTest extends PHPUnit_Framework_TestCase {
 

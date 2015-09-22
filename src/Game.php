@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/Frame.php';
+
 class Game {
  
   const MAX_FRAME_COUNT = 10;
