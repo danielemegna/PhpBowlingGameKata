@@ -8,42 +8,40 @@ class FrameTest extends PHPUnit_Framework_TestCase {
 
   function testFrameCanReturnItsScore() {
     $this->initFrame(3);
-
-    $this->assertEquals(3, $this->frame->getScore());
+    $this->assertScore(3);
   }
 
-  function testFrameCanHaveTwoShots() {
+  function testFrameCanHaveTwoRoll() {
     $this->initFrame(2);
-    $this->frame->setSecondShot(5);
+    $this->frame->secondRoll(5);
 
-    $this->assertEquals(2 + 5, $this->frame->getScore());
+    $this->assertScore(2 + 5);
   }
 
-  function testFrameIsCompleteWhenItHasTwoShots() {
+  function testFrameIsNotCompleteWithoutSecondRoll() {
+    $this->initFrame(3);
+    $this->assertFalse($this->frame->isComplete());
+  }
+
+  function testFrameIsCompleteWhenItHasTwoRoll() {
     $this->initFrame(5);
-    $this->frame->setSecondShot(3);
+    $this->frame->secondRoll(3);
 
     $this->assertTrue($this->frame->isComplete());
   }
 
-  function testFrameIsNotCompleteWithoutSecondShot() {
-    $this->initFrame(3);
-
-    $this->assertFalse($this->frame->isComplete());
-  }
-
   function testSpareTestCase() {
     $this->initFrame(6);
-    $this->frame->setSecondShot(4);
+    $this->frame->secondRoll(4);
 
     $nextFrame = new Frame(5);
-    $nextFrame->setSecondShot(2);
+    $nextFrame->secondRoll(2);
     $this->frame->setNextFrame($nextFrame);
 
-    $this->assertEquals(6 + 4 + 5, $this->frame->getScore());
+    $this->assertScore(6 + 4 + 5);
   }
 
-  function testWithFirstShot10_FrameIsComplete() {
+  function testWithFirstRoll10_FrameIsComplete() {
     $this->initFrame(10);
     $this->assertTrue($this->frame->isComplete());
   }
@@ -52,10 +50,10 @@ class FrameTest extends PHPUnit_Framework_TestCase {
     $this->initFrame(10);
 
     $nextFrame = new Frame(5);
-    $nextFrame->setSecondShot(2);
+    $nextFrame->secondRoll(2);
     $this->frame->setNextFrame($nextFrame);
 
-    $this->assertEquals(10 + (5+2), $this->frame->getScore());
+    $this->assertScore(10 + (5+2));
   }
 
   function testDoubleStrikeTestCase() {
@@ -65,14 +63,17 @@ class FrameTest extends PHPUnit_Framework_TestCase {
     $this->frame->setNextFrame($nextFrame);
 
     $anotherFrame = new Frame(1);
-    $anotherFrame->setSecondShot(2);
+    $anotherFrame->secondRoll(2);
     $nextFrame->setNextFrame($anotherFrame);
 
-    $this->assertEquals(10 + (10+1), $this->frame->getScore());
+    $this->assertScore(10 + (10+1));
   }
 
-  private function initFrame($firstShotScore) {
-    $this->frame = new Frame($firstShotScore);
+  private function initFrame($firstRollScore) {
+    $this->frame = new Frame($firstRollScore);
   }
 
+  private function assertScore($expected) {
+    $this->assertEquals($expected, $this->frame->score());
+  }
 }

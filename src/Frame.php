@@ -2,19 +2,19 @@
 
 class Frame {
   
-  private $firstShot;
-  private $secondShot;
+  private $firstRoll;
+  private $secondRoll;
   private $nextFrame;
 
-  function __construct($firstShot) {
-    $this->firstShot = $firstShot;
-    $this->secondShot = null;
+  function __construct($firstRoll) {
+    $this->firstRoll = $firstRoll;
+    $this->secondRoll = null;
     $this->nextFrame = null;
   }
 
-  function getScore() {
+  function score() {
     return
-      $this->shotsSum() +
+      $this->rollsSum() +
       $this->spareAdditionalScore() +
       $this->strikeAdditionalScore();
   }
@@ -26,11 +26,11 @@ class Frame {
     if($this->nextFrame == null)
       return 0;
 
-    return $this->nextFrame->firstShot;
+    return $this->nextFrame->firstRoll;
   }
 
   private function isSpare() {
-    return ($this->secondShot > 0 && $this->shotsSum() == 10);
+    return ($this->secondRoll > 0 && $this->rollsSum() == 10);
   }
 
   private function strikeAdditionalScore() {
@@ -41,19 +41,19 @@ class Frame {
     if($nextFrame == null)
       return 0;
 
-    $additionalScore = $nextFrame->shotsSum();
+    $additionalScore = $nextFrame->rollsSum();
     if($nextFrame->isStrike())
-      $additionalScore += $nextFrame->getNextFrame()->firstShot;
+      $additionalScore += $nextFrame->getNextFrame()->firstRoll;
       
     return $additionalScore;
   }
 
   private function isStrike() {
-    return ($this->firstShot == 10);
+    return ($this->firstRoll == 10);
   }
 
-  private function shotsSum() {
-    return ($this->firstShot + $this->secondShot);
+  private function rollsSum() {
+    return ($this->firstRoll + $this->secondRoll);
   }
 
   function getNextFrame() {
@@ -64,12 +64,11 @@ class Frame {
     $this->nextFrame = $frame;
   }
 
-  function setSecondShot($secondShot) {
-    $this->secondShot = $secondShot;
+  function secondRoll($knockedDownPins) {
+    $this->secondRoll = $knockedDownPins;
   }
 
   function isComplete() {
-    return $this->firstShot == 10 || $this->secondShot != null;
+    return $this->firstRoll == 10 || $this->secondRoll != null;
   }
-
 }

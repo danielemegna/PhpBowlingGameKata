@@ -15,7 +15,7 @@ class Game {
 
     $count = 1;
     while($currentFrame != null && $count <= self::MAX_FRAME_COUNT) {
-      $score += $currentFrame->getScore();
+      $score += $currentFrame->score();
       $currentFrame = $currentFrame->getNextFrame();
       $count++;
     }
@@ -32,7 +32,7 @@ class Game {
     } 
 
     if(!$lastFrame->isComplete()) {
-      $lastFrame->setSecondShot($knockedDownPins);
+      $lastFrame->secondRoll($knockedDownPins);
       return;
     }
 
