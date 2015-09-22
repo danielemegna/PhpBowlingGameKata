@@ -36,7 +36,7 @@ class GameTest extends PHPUnit_Framework_TestCase {
     $this->assertGameScore(10 + (3) + 7);
   }
 
-  function testSpareInTheMiddleOfGameTestCase() {
+  function testSpareInTheMiddleOfGame() {
     $this->game->roll(1);
     $this->game->roll(3);
 
