@@ -79,6 +79,39 @@ class GameTest extends PHPUnit_Framework_TestCase {
     $this->assertGameScore(300);
   }
 
+  function kataAcceptanceTest() {
+    $this->game->roll(1);
+    $this->game->roll(4);
+
+    $this->game->roll(4);
+    $this->game->roll(5);
+
+    $this->game->roll(6);
+    $this->game->roll(4);
+
+    $this->game->roll(5);
+    $this->game->roll(5);
+
+    $this->game->roll(10);
+
+    $this->game->roll(0);
+    $this->game->roll(1);
+
+    $this->game->roll(7);
+    $this->game->roll(3);
+
+    $this->game->roll(6);
+    $this->game->roll(4);
+
+    $this->game->roll(10);
+
+    $this->game->roll(2);
+    $this->game->roll(8);
+    $this->game->roll(6);
+    
+    $this->assertScore(133);
+  }
+
   private function assertGameScore($expected) {
     $this->assertEquals($expected, $this->game->score());
   }
