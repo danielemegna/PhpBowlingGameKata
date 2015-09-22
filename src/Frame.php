@@ -37,10 +37,15 @@ class Frame {
     if(!$this->isStrike())
       return 0;
 
-    if($this->nextFrame == null)
+    $nextFrame = $this->nextFrame;
+    if($nextFrame == null)
       return 0;
 
-    return $this->nextFrame->shotsSum();
+    $additionalScore = $nextFrame->shotsSum();
+    if($nextFrame->isStrike())
+      $additionalScore += $nextFrame->getNextFrame()->firstShot;
+      
+    return $additionalScore;
   }
 
   private function isStrike() {

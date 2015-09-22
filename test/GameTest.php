@@ -61,6 +61,17 @@ class GameTest extends PHPUnit_Framework_TestCase {
     $this->assertGameScore(10 + 8 + (8) + 9);
   }
 
+  function testTwoConsecutiveStrikes() {
+    $this->game->roll(10);
+
+    $this->game->roll(10);
+
+    $this->game->roll(4);
+    $this->game->roll(2);
+
+    $this->assertGameScore(10 + (10 + 4) + 10 + (4 + 2) + 6);
+  }
+
   private function assertGameScore($expected) {
     $this->assertEquals($expected, $this->game->score());
   }
