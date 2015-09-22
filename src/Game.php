@@ -2,6 +2,7 @@
 
 class Game {
  
+  const MAX_FRAME_COUNT = 10;
   private $firstFrame;
 
   function __construct() {
@@ -13,7 +14,7 @@ class Game {
     $currentFrame = $this->firstFrame;
 
     $count = 1;
-    while($currentFrame != null && $count <= 10) {
+    while($currentFrame != null && $count <= self::MAX_FRAME_COUNT) {
       $score += $currentFrame->getScore();
       $currentFrame = $currentFrame->getNextFrame();
       $count++;
