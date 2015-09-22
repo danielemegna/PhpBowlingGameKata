@@ -48,6 +48,29 @@ class FrameTest extends PHPUnit_Framework_TestCase {
     $this->assertTrue($this->frame->isComplete());
   }
 
+  function testStrikeTestCase() {
+    $this->initFrame(10);
+
+    $nextFrame = new Frame(5);
+    $nextFrame->setSecondShot(2);
+    $this->frame->setNextFrame($nextFrame);
+
+    $this->assertEquals(10 + (5+2), $this->frame->getScore());
+  }
+
+  function testDoubleStrikeTestCase() {
+    $this->initFrame(10);
+
+    $nextFrame = new Frame(10);
+    $this->frame->setNextFrame($nextFrame);
+
+    $anotherFrame = new Frame(1);
+    $anotherFrame->setSecondShot(2);
+    $nextFrame->setNextFrame($anotherFrame);
+
+    $this->assertEquals(10 + (10+1), $this->frame->getScore());
+  }
+
   private function initFrame($firstShotScore) {
     $this->frame = new Frame($firstShotScore);
   }
